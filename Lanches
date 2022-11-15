@@ -1,0 +1,74 @@
+import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native'
+import {useContext} from 'react' 
+import { CarrinhoContexto } from '../contextos/CarrinhoContexto'
+
+export function Lanches ({fotoLanche, lanche, local, preco}){
+
+  //Faz o contexto dos objetosentre as telas
+const [carrinho, setCarrinho] = useContext(CarrinhoContexto);
+
+
+//Envia os objetos para tela de carrinho
+  irParaCarrinho = () => {
+    setCarrinho([...carrinho, { lanche, local, preco }]);
+  };
+
+
+return (
+  <View style={style.linhaFoto}>
+  <Image style={style.imagemLanche} source={{ uri: fotoLanche }}/>
+  <View style={style.colunaItens}>
+  <Text style={style.nome}>{lanche}</Text>
+   <Text style={style.local}>{local}</Text>
+    <Text style={style.preco}>R$ {preco.toFixed(2)}</Text>
+    <TouchableOpacity style={style.botAdiciona} onPress={irParaCarrinho}>
+    <Text style={style.textAdiciona}>Adicionar</Text>
+    </TouchableOpacity>
+  </View>
+  </View>
+)
+
+}
+
+const style = StyleSheet.create({
+imagemLanche: {
+  width: 120,
+  height: 120
+},
+
+linhaFoto: {
+   flexDirection: 'row',
+   borderBottomColor: '#FF0000',
+   borderBottomWidth: 1,
+    marginBottom: 20,
+    padding: 20,
+    margin: 5
+},
+colunaItens: {
+  margin: 15
+},
+
+nome: {
+  fontWeight: 'bold',
+  fontSize: 15
+},
+local :{
+  color: '#C0C0C0'
+},
+preco: {
+  fontSize: 25
+},
+botAdiciona: {
+  borderColor: '#FF0000',
+  borderWidth: 1,
+  borderRadius: 5,
+  width: 100,
+  padding: 5
+},
+textAdiciona: {
+  textAlign: 'center',
+  fontWeight: 'bold',
+  color: '#FF0000'
+}
+
+})
