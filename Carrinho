@@ -1,0 +1,60 @@
+import {View, StyleSheet, Text, TouchableOpacity} from 'react-native'
+import { useContext} from 'react'
+import {CarrinhoContexto} from '../contextos/CarrinhoContexto'
+
+
+export function Carrinho ({lanche, local, preco}){
+    //Faz o contexto dos objetosentre as telas
+  const [carrinho, setCarrinho] = useContext(CarrinhoContexto);
+
+//Exclui um item na lista
+  const excluirItem = (index) => {
+    const arr = [...carrinho];
+    arr.splice(index, 1);
+    setCarrinho(arr);
+  };
+
+return(
+ <View style={style.separador}>
+
+ <View>
+  <Text style={style.nome}>{lanche}</Text>
+   <Text style={style.local}>{local}</Text>
+    </View>
+
+    <Text style={style.preco}>R$ {preco.toFixed(2)}</Text>
+
+    <TouchableOpacity onPress={excluirItem}>
+    <Text>Excluir</Text>
+    </TouchableOpacity>
+    </View>
+)
+
+}
+
+const style = StyleSheet.create({
+  separador: {
+  flexDirection: 'row',
+   borderBottomColor: '#FF0000',
+   borderBottomWidth: 1,
+    padding: 20,
+    margin: 5,
+   justifyContent: 'space-around',
+  },
+nome: {
+  fontWeight: 'bold',
+  fontSize: 15
+},
+local :{
+  color: '#C0C0C0'
+},
+preco: {
+  fontWeight: 'bold',
+  fontSize: 20,
+  
+},
+
+
+
+})
+
